@@ -75,7 +75,13 @@ class WeatherProvider(context: Context, workerHandler: Handler) :
                 addAction(WEATHER_UPDATE)
                 addAction(WEATHER_ERROR)
             }
-        context.registerReceiver(weatherReceiver, filter, Context.RECEIVER_EXPORTED)
+        context.registerReceiver(
+            weatherReceiver,
+            filter,
+            OMNIJAWS_READ_PERMISSION,
+            workerHandler,
+            Context.RECEIVER_EXPORTED,
+        )
 
         weatherObserver =
             object : ContentObserver(workerHandler) {
@@ -252,6 +258,7 @@ class WeatherProvider(context: Context, workerHandler: Handler) :
     companion object {
         private const val TAG = "WeatherProvider"
         private const val OMNIJAWS_PACKAGE = "org.omnirom.omnijaws"
+        private const val OMNIJAWS_READ_PERMISSION = "$OMNIJAWS_PACKAGE.READ_WEATHER"
         private val WEATHER_URI = Uri.parse("content://org.omnirom.omnijaws.provider/weather")
         private val SETTINGS_URI = Uri.parse("content://org.omnirom.omnijaws.provider/settings")
         private const val WEATHER_UPDATE = "$OMNIJAWS_PACKAGE.WEATHER_UPDATE"

@@ -25,20 +25,18 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.android.axion.compose.theme.AxionTheme
-import com.google.android.material.color.DynamicColors
 
 class QuickLookSettingsActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        DynamicColors.applyToActivityIfAvailable(this)
         enableEdgeToEdge()
 
         setContent {
             AxionTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.surfaceContainer,
+                    color = MaterialTheme.colorScheme.surface,
                 ) {
                     QuickLookSettingsScreen(onBack = { finish() })
                 }
